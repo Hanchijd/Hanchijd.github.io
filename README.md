@@ -8,7 +8,7 @@
 
 **Email**: [mailto:hanchijd@mail.uc.edu](hanchijd@mail.uc.edu)
 
-![Jack's Headshot](https://webcentral.uc.edu/eprof/media/repository/1549HanchinJack4007.jpg){ width=150px height=150px }
+![Jack's Headshot](https://webcentral.uc.edu/eprof/media/repository/1549HanchinJack4007.jpg)
 
 
 [https://github.com/Hanchijd/Hanchijd.github.io](https://github.com/Hanchijd/Hanchijd.github.io)
@@ -24,13 +24,13 @@ In this project, you will expand front-end web development skills by developing 
 
 In this project, we develop a Professional Profile Website using a culmination of everything we've learned thus far in this class, focusing primarily on the front end. As seen below, this lab requires a great deal of general, technical and non-technical skills, including but not limited to GitHub, Javascript via JQuery and Ajax, Web API Integration, JavaScript cookies, use of an open-source CSS template/framework, dealing with VMs, and writing/formatting long reports.
 
-###General requirements (30 pts):
+### General requirements (30 pts):
 - Create and deploy a personal website on GitHub cloud (github.io) as a professional profile with your resume, including your name, headshot, contact information, background, e.g., education, your experiences and skills (25 pts).​
 - Create a link to a new HTML page to introduce this "Web Application Programming and Hacking" course and related hands-on projects (5 pts)​
 
 **A website was created in a .html file utilizing a VM that contains the below requirements, formatted as to be both as functional and aethestically pleasing as possible given the current experience level. Included are the resume, name, headshot, contact, and background of the student. A new HTML page to introduce the course and related projects was also created.**
 
-###Non-technical requirements (20 pts)​
+### Non-technical requirements (20 pts)​
 - Use an open-source CSS template or framework such as Bootstrap​
 
 Target this profile for your potential employer, and your page will be graded as a part of your job application​

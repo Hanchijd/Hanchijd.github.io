@@ -1,0 +1,323 @@
+pre, code { 
+    white-space: pre-wrap; 
+    word-wrap: break-word; 
+} 
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>WAPH-Hanchijd</title>
+	<link rel="stylesheet"
+	href=https://waph-phung.github.io/style1.css>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<style>
+		.button {
+			background-color: #4CAF50; /* Green */
+			border: none;
+			color: white;
+			padding: 5px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 12px;
+			margin: 4px 2px;
+			cursor: pointer;
+		}
+		.round {border-radius: 8px;}
+		#response {background-color: #ff9800;} /* Orange */
+		<div id="apod-container"> 
+    		<img id="apod" /> 
+    		<h3 id="apod-title"></h3> 
+    		<p id="apod-info"></p> 
+		</div> 
+
+		#apod-container { 
+		    text-align: center; 
+		    margin: 20px auto; 
+		    max-width: 700px; 
+		} 
+		#apod { 
+		    max-width: 100%; 
+		    height: auto; 
+		    border-radius: 10px; 
+		    box-shadow: 0 0 10px rgba(0,0,0,0.3); 
+		} 
+		#apod-title { 
+		    font-size: 1.4em; 
+		    margin-top: 10px; 
+		} 
+		#apod-info { 
+		    font-size: 1em; 
+		    color: #444; 
+		    margin-top: 5px; 
+		} 
+
+		#disclaimer { 
+		    margin: 40px; 
+		    padding: 10px 15px; 
+		    max-width: 800px; 
+		    font-size: 14px; 
+		    color: #555; 
+		    background: #f2f2f2; 
+		    border-left: 4px solid #888; 
+		    border-radius: 4px; 
+		    margin-right: auto;
+		    margin-left: auto;
+		    display: block;
+		} 
+
+		#menubar {
+			position: relative;
+			z-index: 10;
+		}
+
+		#welcome {
+			background-color: #8B4513; /*brown I hope*/
+			color: white;
+			padding: 10px 15px;
+			border-radius: 6px;
+			max-width: 600px;
+			margin: 20px auto;
+			text-align: center;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<div class="container wrapper">
+	<div id="top">
+		<h1>Web Application Programming and Hacking</h1>
+		<h2> Front-end Web Development Lab</h2>
+		<h3>Instructor: Dr. Phu Phung</h3>
+	</div>
+	<div id="menubar">
+		<h3>Student: Jack Hanchin</h3>
+		<img src="images/headshot.jpeg" alt="My headshot" width = "50">
+		<div id="digit-clock"></div>
+		<canvas id="analog-clock" width="150" height="150" style="background-color:#999">
+		</canvas>
+		<script src="https://waph-phung.github.io/clock.js"></script>
+		<script>
+			function jQueryAjax() {
+				var input = $("#data").val();
+				if (input.length == 0) return;
+				$.get("echo.php?data="+input,
+					function(result) {
+						$("#response").html("Response from the server:" 
+						+ result);
+					}
+				);
+				$("#data").val("");
+			}
+			function jQueryAjaxPost() {
+				var input = $("#data").val();
+				if (input.length == 0) return;
+				$.post("echo.php",{data: input},
+					function( result ) {
+						$("#response").html("Response from the server:" 
+						+ result);
+					}
+				);
+				$("#data").val("");
+			}
+		</script>
+		<script>
+			var canvas = document.getElementById("analog-clock");
+			var ctx = canvas.getContext("2d");
+			var radius = canvas.height / 2;
+			ctx.translate(radius, radius);
+			radius = radius * 0.90
+			setInterval(drawClock, 1000);
+
+			function drawClock() {
+				drawFace(ctx, radius);
+				drawNumbers(ctx, radius);
+				drawTime(ctx, radius);
+			}
+		</script>
+		<script>
+			function getEcho() {
+				var input = document.getElementById("data").value;
+				if (input.length == 0) {
+					return;
+				}
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 &&
+						this.status == 200) {
+						console.log("Received data=
+						"+xhttp.responseText);
+						document.getElementById("response").innerText=
+						"Response from server:" + xhttp.responseText;
+						//code to show the data, did not copy/paste.
+					}
+				}
+				xhttp.open("GET","echo.php?data="+input, true);
+				//code to create an Ajax request, did not copy/paste.
+				xhttp.send(); //code to send the request, did not copy/paste
+				document.getElementById("data").value="";
+			}
+		</script>
+		<script type="text/javascript">
+			function displayTime() {
+				document.getElementById('digit-clock').innerHTML =
+				 "Current time:" + new Date();
+			}
+			setInterval(displayTime,500);
+		</script>
+		<div id="email" onclick="showhideEmail()">Show my email</div>
+		<script src="email.js"></script>
+	</div>
+	<div id="main">
+		<p>A simple HTML page</p>
+		Using the <a href="https://www.w3schools.com/html"> W3Schools template</a>
+		<hr>
+		<b>Interaction with forms</b>
+		<div>
+			<i>Form with an HTTP GET Request</i>
+			<form action="/echo.php" method="GET">
+				Your input: <input name="data">
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+		<div>
+			<i>Form with an HTTP POST Request</i>
+			<form action ="/echo.php" method="POST" name="echo_post">
+				Your input: <input name="data">
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+		<div>
+			<i>Ajax requests</i><br>
+				Your input:
+				<input name="data"
+					onkeypress="console.log('You have pressed a key')" 
+					id="data">
+				<input type="button" value="Submit" onclick="getEcho()">
+				<div id="response"></div>
+		</div>
+		<input class="button round" type="button" value="jQuery Ajax GET Echo" onclick=
+		"jQueryAjax()">
+		<input class="button round" type="button" value="jQuery Ajax POST Echo" onclick=
+		"jQueryAjaxPost()">
+		<script>
+			function daJokerBB() {
+			$.get("https://sv443.net/jokeapi/v2/joke/Programming?type=single",
+				function(result) {
+					console.log("From jokeAPI: " + JSON.stringify(result));
+					$("#response" ).html
+					( "A programming joke of the minute: " + result.joke);
+				});
+			}
+
+			daJokerBB();
+			
+			setInterval(daJokerBB, 60000);
+		</script>
+		<!-- <img id="apod" width="600">
+		<p id="apod-info"></p> -->
+		<hr>
+		<b>Experiments with JavaScript code</b><br>
+		<i>Inlined Javascript</i>
+		<div id="data" onclick="document.getElementById('date').innerHTML
+		= Date()">Click here to show Date()</div>
+		</div>
+		<p id="welcome"></p>
+		<div id="menubar"> 
+		    <a href="#">Home</a> 
+		    <a href="#">APOD</a> 
+		    <a href="#">Jokes</a> 
+		    <a href="#">Contact</a> 
+		</div> 
+
+		<div id="disclaimer"> 
+		    This page displays content retrieved from public third‑party APIs 
+		    All external data is generated by those services, and I am not responsible 
+		    for the content they provide. 
+		</div> 
+		
+		<hr class="divider">
+		<div id="apod-container"> 
+		    <img id="apod" /> 
+		    <h3 id="apod-title"></h3> 
+		    <p id="apod-info"></p> 
+		</div> 
+		<div id="tracker">
+			<a href="https://info.flagcounter.com/8y2v"><img src
+			="https://s01.flagcounter.com/count2/8y2v/bg_FFFFFF/txt_000000/border_CCCCCC
+			/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/
+			" alt="Flag Counter" border="0"></a> 
+		</div>
+		<script>
+			$(document).ready(function () {
+
+				function NASAexe() {
+					$.get("https://api.nasa.gov/planetary/apod?api_key=
+					x4xoM6elfnrX7wOSUYFZWWGI19eWJPZ7xkjOV3U8",
+						function(result) {
+							console.log("NASA Astronomy Picture of the Day:", result);
+
+							if (result.media_type === "image") {
+								$("#apod").attr("src", result.url);
+								$("#apod").on("error", function () { 
+							    	$("#apod").hide(); 
+							    	$("#apod-info").html( 
+							        	"The APOD image could not be loaded.
+							        	 NASA may have moved or archived it." 
+							    	); 
+								}); 
+								$("#apod-info").html(result.explanation);
+							} else {
+								$("#apod").attr("src", "");
+								$("#apod").on("error", function () { 
+							    	$("#apod").hide(); 
+							    	$("#apod-info").html( 
+							        	"The APOD image could not be loaded.
+							        	 NASA may have moved or archived it." 
+							    	); 
+								});
+								$("#apod-info").after("<p>Today's Astronomy Picture of 
+								the Day is a video: <a href='" + result.url + "'>" + "</a>");
+							}
+						}
+					)
+				}
+				NASAexe();
+
+			});
+
+			</script>
+			<script>
+				function setCookie(name, value, days) { const d = new Date(); 
+				d.setTime(d.getTime() + (days*24*60*60*1000)); let expires 
+				= "expires="+ d.toUTCString(); document.cookie 
+				= name + "=" + value + ";" + expires + ";path=/"; } 
+
+				function getCookie(name) { let cname = name + "="; let decodedCookie 
+				= decodeURIComponent(document.cookie); let ca 
+				= decodedCookie.split(';'); for(let i 
+				= 0; i < ca.length; i++) { let c = ca[i].trim(); if (c.indexOf(cname) === 0) 
+				{return c.substring(cname.length, c.length); } } return ""; } 
+
+				function checkVisit() { let lastVisit = getCookie("lastVisit"); let now 
+				= new Date().toString(); 
+
+				if (lastVisit === "") { 
+				   // First time ever 
+				   document.getElementById("welcome").innerHTML = 
+				       "Welcome to my homepage for the first time!"; 
+				} else { 
+				   // Returning visitor 
+				   document.getElementById("welcome").innerHTML = 
+				       "Welcome back! Your last visit was " + lastVisit; 
+				} 
+					
+				// Update cookie for next time 
+				setCookie("lastVisit", now, 365); 
+				} 
+
+				checkVisit(); 
+			</script>
+</body>
+</html>
