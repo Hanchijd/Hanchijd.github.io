@@ -1,35 +1,29 @@
 <?php
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	if (isset($_POST["username"]) and isset($_POST["password"])) {
-		echo "Debug> got username=$username;password=$password";
-		/*if (checklogin_mysql($_POST["username"],$_POST["password"])) {
-		$_SESSION['authenticated'] = TRUE;
-		$_SESSION['username'] = $_POST["username"];
+	$username = $_POST["username"];
+	$password = $_POST["password"];
+	if (isset($username) and isset($password)){
+		//echo "Debug> got username=$username;password=$password";
+		if (addnewuser($username,$password)) {
+			echo "Registration succeed!";
 		}else{
-			session_destroy();
-			echo "<script>alert('Invalid username/password');window.location='form.php';</script>";
-			die();
-		}*/
+			echo "Registration failed!";
+
+		}
 	}else{
-		echo "No username/passworld provided!";
+		echo "No username/password provided!";
 	}
 
-  	function checklogin_mysql($username, $password) {
+  	function addnewuser($username, $password) {
   		$pass = 'Pa$$w0rd';
 		$mysqli = new mysqli('localhost','Hanchijd', $pass, 'waph');
 		if ($mysqli->connect_errno){
 			printf("Database connection failed: %s\n", $mysqli->connect_error);
-			exit();
+			return FALSE;
 		} 
-		$sql = "SELECT * FROM users WHERE username=? AND password = md5(?)";
-		//echo "DEBUG>sql= $sql"; //return TRUE;
-		$stmt = $mysqli->prepare($sql);
-		$stmt->bind_param("ss", $username, $password);
-		$stmt->execute();
-		$result = $stmt->get_result();//$result = $mysqli->query($sql);
-		if($result->num_rows ==1)
-			return TRUE;
+		$prepared_sql = "INSERT INTO users (username,password) VALUES (?,md5(?))";
+		$stmt = $mysqli->prepare($prepared_sql);
+		$stmt->bind_param("ss", $username,$password);
+		if($stmt->execute()) return TRUE;
 		return FALSE;
   	}
 ?>
