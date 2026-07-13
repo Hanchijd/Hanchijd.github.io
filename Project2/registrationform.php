@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>WAPH-Login page</title>
+  <title>Sign Up for a new account</title>
   <script type="text/javascript">
       function displayTime() {
         const options = {
@@ -20,17 +20,17 @@
   </script>
 </head>
 <body>
-  <h1>A Simple login form, WAPH</h1>
-  <h2>Student Name</h2>
+  <h1>New user registration, WAPH</h1>
+  <h2>Jack Hanchin</h2>
   <div id="digit-clock"></div>  
 <?php
   //some code here
   echo "Visited time: " . date("M-d h:i:sa")
 ?>
-  <form action="index.php" method="POST" class="form login">
+  <form action="addnewuser.php" method="POST" class="form login">
     Username:<input type="text" class="text_field" name="username" /> <br>
-    Password: <input type="password" class="text_field" name="password" /> <br>
-    <button class="button" type="submit">Login</button>
+    Password:<input type="password" class="text_field" name="password" /> <br>
+    <button class="button" type="submit">Sign-up</button>
   </form>
 </body>
 </html>
