@@ -1,11 +1,11 @@
-<?php require "session_auth.php"; ?>
 <?php 
 session_start(); 
   
 if (isset($_POST["username"]) && isset($_POST["password"])) { 
     if (checklogin_mysql($_POST["username"], $_POST["password"])) { 
         $_SESSION['authenticated'] = TRUE; 
-        $_SESSION['username'] = $_POST["username"]; 
+        $_SESSION['username'] = $_POST["username"];
+        $_SESSION['browser'] = $_SERVER['HTTP_USER_AGENT'];
         header("Location: index.php"); // reload page after login 
         exit(); 
     } else { 
@@ -20,6 +20,9 @@ if (!isset($_SESSION["authenticated"]) || $_SESSION["authenticated"] != TRUE) {
     echo "<script>alert('You have not logged in, please log in first!');window.location='form.php';</script>"; 
     die(); 
 }
+
+require "session_auth.php";
+
 function checklogin_mysql($username, $password) { 
     $pass = 'Pa$$w0rd'; 
     $mysqli = new mysqli('localhost', 'Hanchijd', $pass, 'waph'); 
