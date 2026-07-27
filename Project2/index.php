@@ -42,7 +42,28 @@ function checklogin_mysql($username, $password) {
 ?> 
   
 <h2>Welcome <?php echo htmlentities($_SESSION['username']); ?>!</h2> 
-  
+
+  <script> 
+  window.addEventListener("DOMContentLoaded", () => { 
+    const username = "<?php echo htmlentities($_SESSION['username']); ?>"; 
+    const message = `Welcome back, ${username}!`; 
+    const popup = document.createElement("div"); 
+    popup.textContent = message; 
+    popup.style.position = "fixed"; 
+    popup.style.top = "20px"; 
+    popup.style.right = "20px"; 
+    popup.style.backgroundColor = "#0078D7"; 
+    popup.style.color = "white"; 
+    popup.style.padding = "10px 20px"; 
+    popup.style.borderRadius = "5px"; 
+    popup.style.boxShadow = "0 2px 6px rgba(0,0,0,0.3)"; 
+    popup.style.fontFamily = "Segoe UI, sans-serif"; 
+    popup.style.zIndex = "1000"; 
+    document.body.appendChild(popup); 
+    setTimeout(() => popup.remove(), 3000); // disappears after 3 seconds 
+  }); 
+</script>
+
 <?php 
 // Step 4: Display profile info 
 $pass = 'Pa$$w0rd'; 
