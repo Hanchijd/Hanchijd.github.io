@@ -1,7 +1,7 @@
 <?php 
 $lifetime = 15 * 60;
 $path = "/"; 
-$domain = "192.168.56.101";
+$domain = "192.150.145.11";
 $secure = TRUE; 
 $httponly = TRUE; 
   
