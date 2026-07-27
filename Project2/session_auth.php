@@ -1,7 +1,7 @@
 <?php 
-$lifetime = 15 * 60; // 15 minutes 
+$lifetime = 15 * 60;
 $path = "/"; 
-$domain = "192.168.56.101"; // replace with your server IP or hostname 
+$domain = "192.168.56.101";
 $secure = TRUE; 
 $httponly = TRUE; 
   
@@ -16,7 +16,6 @@ if (!isset($_SESSION["authenticated"]) || $_SESSION["authenticated"] != TRUE) {
 } 
   
 if ($_SESSION["browser"] != $_SERVER["HTTP_USER_AGENT"]) { 
-    // Session hijacking protection 
     session_destroy(); 
     echo "<script>alert('Session hijacking attack detected!');</script>"; 
     header("Refresh:0; url=form.php"); 
